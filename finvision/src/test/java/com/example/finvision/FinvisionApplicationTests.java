@@ -1,10 +1,10 @@
-package com.example.FinVisionAPI;
+package com.example.finvision;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FinVisionApiApplicationTests {
+class FinvisionApplicationTests {
 
 	@Test
 	void contextLoads() {
