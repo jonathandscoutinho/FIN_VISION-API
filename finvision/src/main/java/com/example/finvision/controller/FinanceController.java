@@ -13,37 +13,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.finvision.model.User;
-import com.example.finvision.service.UserService;
+import com.example.finvision.model.Finance;
+import com.example.finvision.service.FinanceService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(path="/user")
-public class UserController {
+@RequestMapping(path="/finance")
+public class FinanceController {
 	
-	private UserService userService;
+	private FinanceService userService;
 	
-	public UserController(UserService userService) {
+	public FinanceController(FinanceService userService) {
 		this.userService = userService;
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<User>> listaUsuarios(){
+	public ResponseEntity<List<Finance>> listaUsuarios(){
 		return ResponseEntity.status(200).body(userService.listarUsuario());
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> criarUsuario (@RequestBody User user) {
+	public ResponseEntity<Finance> criarUsuario (@RequestBody Finance user) {
 		return ResponseEntity.status(201).body(userService.criarUsuario(user));
 	}
 	
 	@PutMapping
-	public ResponseEntity<User> editarUsuario (@RequestBody User user) {
+	public ResponseEntity<Finance> editarUsuario (@RequestBody Finance user) {
 		return ResponseEntity.status(201).body(userService.editarUsuario(user));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> excluirUsuario (@PathVariable String id){
+	public ResponseEntity<?> excluirUsuario (@PathVariable Integer id){
 		userService.excluirUsuario(id);
 		return ResponseEntity.status(204).build();
 	}
