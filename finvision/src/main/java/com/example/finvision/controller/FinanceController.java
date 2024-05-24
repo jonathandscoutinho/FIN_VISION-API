@@ -1,7 +1,9 @@
 package com.example.finvision.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,14 +29,17 @@ public class FinanceController {
 		this.financeService = userService;
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<List<Finance>> listarFinancaId(){
-		return ResponseEntity.status(200).body(financeService.listarFinancas());
-	}
-	
+
 	@GetMapping
 	public ResponseEntity<List<Finance>> listarFinanca(){
 		return ResponseEntity.status(200).body(financeService.listarFinancas());
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Finance> preencherFinanca(@PathVariable Integer id) {
+	    Optional<Finance> financa = financeService.preencherFinanca(id);
+	    return financa.map(ResponseEntity::ok)
+	                  .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
 	@PostMapping
@@ -42,10 +47,18 @@ public class FinanceController {
 		return ResponseEntity.status(201).body(financeService.criarFinanca(finance));
 	}
 	
-	@PutMapping
-	public ResponseEntity<Finance> editarFinanca (@RequestBody Finance finance) {
-		return ResponseEntity.status(201).body(financeService.editarFinanca(finance));
+	@PutMapping("/{id}")
+	public ResponseEntity<Finance> editarFinanca(@PathVariable Integer id, @RequestBody Finance finance) {
+	    Optional<Finance> financeExistente = financeService.buscarPorId(id);
+	    if (financeExistente.isPresent()) {
+	        Finance financaAtualizada = financeService.editarFinanca(id, finance);
+	        return ResponseEntity.ok(financaAtualizada);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	    }
 	}
+	
+	
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> excluirFinanca (@PathVariable Integer id){
