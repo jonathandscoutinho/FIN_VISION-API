@@ -19,25 +19,25 @@ public class FinanceService {
 	}
 	
 	//GET
-	public List<Finance> listarUsuario(){
+	public List<Finance> listarFinancas(){
 		List<Finance> Lista = (List<Finance>) repository.findAll();
 		return Lista;
 	}
 	
 	//POST
-	public Finance criarUsuario(Finance user) {
-		Finance usuarioNovo = repository.save(user);
-		return usuarioNovo;
+	public Finance criarFinanca(Finance financa) {
+		Finance financaNova = repository.save(financa);
+		return financaNova;
 	}
 	
 	//PUT
-	public Finance editarUsuario(Finance user) {
-		Finance usuarioNovo = repository.save(user);
-		return usuarioNovo;
+	public Finance editarFinanca(Finance financa) {
+		Finance financaNova = repository.save(financa);
+		return financaNova;
 	}
 	
 	//DELETE
-	public Boolean excluirUsuario(Integer id) {
+	public Boolean excluirFinanca(Integer id) {
 		repository.deleteById(id);
 		return true;
 	}

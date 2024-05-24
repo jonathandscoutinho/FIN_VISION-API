@@ -21,30 +21,35 @@ import com.example.finvision.service.FinanceService;
 @RequestMapping(path="/finance")
 public class FinanceController {
 	
-	private FinanceService userService;
+	private FinanceService financeService;
 	
 	public FinanceController(FinanceService userService) {
-		this.userService = userService;
+		this.financeService = userService;
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<List<Finance>> listarFinancaId(){
+		return ResponseEntity.status(200).body(financeService.listarFinancas());
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Finance>> listaUsuarios(){
-		return ResponseEntity.status(200).body(userService.listarUsuario());
+	public ResponseEntity<List<Finance>> listarFinanca(){
+		return ResponseEntity.status(200).body(financeService.listarFinancas());
 	}
 	
 	@PostMapping
-	public ResponseEntity<Finance> criarUsuario (@RequestBody Finance user) {
-		return ResponseEntity.status(201).body(userService.criarUsuario(user));
+	public ResponseEntity<Finance> criarFinanca (@RequestBody Finance finance) {
+		return ResponseEntity.status(201).body(financeService.criarFinanca(finance));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Finance> editarUsuario (@RequestBody Finance user) {
-		return ResponseEntity.status(201).body(userService.editarUsuario(user));
+	public ResponseEntity<Finance> editarFinanca (@RequestBody Finance finance) {
+		return ResponseEntity.status(201).body(financeService.editarFinanca(finance));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> excluirUsuario (@PathVariable Integer id){
-		userService.excluirUsuario(id);
+	public ResponseEntity<?> excluirFinanca (@PathVariable Integer id){
+		financeService.excluirFinanca(id);
 		return ResponseEntity.status(204).build();
 	}
 }	

@@ -2,6 +2,8 @@ package com.example.finvision.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,15 +22,16 @@ public class Finance {
 	private Integer id;
     
 	@Column(name = "date", nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDate date;
     
-    @Column(name = "description", length = 50, nullable = false)
+    @Column(name = "description", length = 50, nullable = true)
     private String description;
     
-    @Column(name = "category", length = 50, nullable = false)
+    @Column(name = "category", length = 50, nullable = true)
     private String category;
     
-    @Column (name = "value", nullable = false)
+    @Column (name = "value", nullable = true)
     private Double value;
 
 	public Integer getId() {
