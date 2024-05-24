@@ -3,7 +3,7 @@
 ### Descrição:
 Esta API é um projeto desenvolvido em Java utilizando a tecnologia Spring Boot. Seu principal objetivo é estabelecer a comunicação entre o front-end <a href="https://github.com/joanthandscoutinho/finVision_front-spti" target="_blank">FinVision</a> e o banco de dados, permitindo operaçoes CRUD nos dados recebidos pelo front-end, e atualizar as mudanças desses dados em um banco de dados MySQL.
 
-#### Requisitos
+### Requisitos:
 
 - IDE de sua preferência
 - MySQL com banco e tabela criados de acordo com o mapeamento do Spring
