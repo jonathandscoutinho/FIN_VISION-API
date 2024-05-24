@@ -13,10 +13,8 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class FinanceService {
 
-	//instanciação do CRUD Repository
 	private IFinance repository;
 	
-	//Construtor do objeto repository acima
 	public  FinanceService(IFinance repository) {
 		this.repository = repository;
 	}
@@ -27,6 +25,7 @@ public class FinanceService {
 		return Lista;
 	}
 	
+	//GET/{id} - Irá retornar um GET apenas com o id solicitado no corpo da requisição.
 	public Optional<Finance> preencherFinanca(Integer id) {
 	    return repository.findById(id);
 	}
@@ -37,10 +36,6 @@ public class FinanceService {
 		return financaNova;
 	}
 	
-	//
-	public Optional<Finance> buscarPorId(Integer id) {
-        return repository.findById(id);
-    }
 	
 	//PUT
 	public Finance editarFinanca(Integer id, Finance financa) {
@@ -51,6 +46,11 @@ public class FinanceService {
 	        throw new EntityNotFoundException("Finance with ID " + id + " not found");
 	    }
 	}
+	
+	//Verifica se existe este id no banco, deve retornar true para o método editarFinanca no FinanceController
+	public Optional<Finance> buscarPorId(Integer id) {
+        return repository.findById(id);
+    }
 	
 	//DELETE
 	public Boolean excluirFinanca(Integer id) {

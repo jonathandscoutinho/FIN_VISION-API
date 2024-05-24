@@ -29,7 +29,6 @@ public class FinanceController {
 		this.financeService = userService;
 	}
 	
-
 	@GetMapping
 	public ResponseEntity<List<Finance>> listarFinanca(){
 		return ResponseEntity.status(200).body(financeService.listarFinancas());
